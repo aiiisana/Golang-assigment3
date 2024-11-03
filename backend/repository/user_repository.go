@@ -58,8 +58,7 @@ func LoginUser(c *gin.Context) {
 		return
 	}
 
-	// Ищем пользователя
-	var foundUser *models.User // используйте models.User вместо User
+	var foundUser *models.User
 	for _, user := range users {
 		if user.Email == loginData.Email && user.Password == loginData.Password {
 			foundUser = &user
@@ -72,7 +71,6 @@ func LoginUser(c *gin.Context) {
 		return
 	}
 
-	// Генерация токена
 	token, err := middleware.GenerateJWT(foundUser.ID, foundUser.Role)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not generate token"})
@@ -118,7 +116,7 @@ func GetUserInfo(c *gin.Context) {
 }
 
 func UpdateUserData(c *gin.Context) {
-	userIDStr := c.Param("userId") // Изменено на userId
+	userIDStr := c.Param("userId")
 	userID, err := strconv.ParseUint(userIDStr, 10, 32)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Неверный ID пользователя"})
@@ -158,9 +156,8 @@ func UpdateUserData(c *gin.Context) {
 		}
 	}
 
-	// Добавление заголовков для ответа
-	c.Header("X-User-Id", strconv.Itoa(int(user.ID)))   // Заголовок с обновленным ID пользователя
-	c.Header("X-User-Role", c.MustGet("role").(string)) // Заголовок с ролью пользователя
+	c.Header("X-User-Id", strconv.Itoa(int(user.ID)))
+	c.Header("X-User-Role", c.MustGet("role").(string))
 
 	c.JSON(http.StatusOK, user)
 }

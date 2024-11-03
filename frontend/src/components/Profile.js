@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate here
+import { useParams, useNavigate } from 'react-router-dom';
 import "./profile.css";
 import { Form, Button, Table } from 'react-bootstrap';
 
 const Profile = () => {
     const { userId } = useParams();
-    const navigate = useNavigate(); // Initialize navigate here
+    const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
     const [allUsers, setAllUsers] = useState([]);
     const [isAdmin, setIsAdmin] = useState(false);
