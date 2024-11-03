@@ -1,0 +1,12 @@
+.task-list__wrapper {
+    padding: 20px;
+  }
+  
+  .task-item {
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .task-item:hover {
+    background-color: #f1f1f1;
+  }
